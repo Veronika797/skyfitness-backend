@@ -1,6 +1,6 @@
 import request from "supertest";
-import { app } from "../../test/setup";
-import Course from "../../models/Course";
+import { app } from "../../test/setup.js";
+import Course from "../../models/Course.js";
 
 describe("GET /api/fitness/courses", () => {
   beforeEach(async () => {

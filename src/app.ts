@@ -25,18 +25,14 @@ app.use((req: Request, res: Response) => {
 });
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error("Server error:", err);
   res.status(500).json({ message: "Что-то пошло не так" });
 });
 
 export const startServer = async () => {
   try {
     await connectDB();
-    return app.listen(PORT, () => {
-      console.log(`Сервер запущен на http://127.0.0.1:${PORT}`);
-    });
+    return app.listen(PORT, () => {});
   } catch (error) {
-    console.error("Ошибка запуска сервера:", error);
     process.exit(1);
   }
 };

@@ -54,18 +54,13 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    console.log("📥 [login] Запрос:", req.body);
-
     const { email, password } = req.body;
 
     if (!email || !password) {
-      console.warn("⚠️ [login] Не передан email или пароль");
       return res.status(400).json({ message: "Email и пароль обязательны" });
     }
 
     const user = await User.findOne({ email }).select("+password");
-
-    console.log("🔍 [login] Пользователь найден:", user ? "✅" : "❌");
 
     if (!user) {
       return res
@@ -74,7 +69,6 @@ export const login = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("🔐 [login] Пароль совпадает:", isMatch);
 
     if (!isMatch) {
       return res.status(401).json({ message: "Неверный пароль" });
@@ -84,19 +78,11 @@ export const login = async (req, res) => {
       expiresIn: JWT_EXPIRES_IN || "7d",
     });
 
-    console.log("✅ [login] Успешный вход, токен сгенерирован");
-
     res.json({
       message: "Вход выполнен успешно",
       token,
     });
   } catch (error) {
-    console.error("❌ [login] Критическая ошибка:", {
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-    });
-
     res.status(500).json({ message: "Ошибка сервера" });
   }
 };
