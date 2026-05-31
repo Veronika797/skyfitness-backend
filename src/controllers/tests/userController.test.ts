@@ -1,9 +1,9 @@
 import request from "supertest";
-import { app } from "../../test/setup";
-import User from "../../models/User";
+import { app } from "../../test/setup.js";
+import User from "../../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../../utils/constants";
+import { JWT_SECRET } from "../../utils/constants.js";
 
 const generateToken = (userId: string): string =>
   jwt.sign({ userId }, JWT_SECRET, { expiresIn: "7d" });

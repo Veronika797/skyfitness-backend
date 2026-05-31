@@ -95,7 +95,6 @@ export const saveWorkoutProgress = async (req, res) => {
 
     res.json({ message: "Прогресс сохранён!" });
   } catch (error) {
-    console.error("❌ [saveWorkoutProgress] Ошибка:", error);
     res.status(500).json({ message: "Ошибка сервера" });
   }
 };
