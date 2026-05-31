@@ -8,7 +8,7 @@ import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/users/me/progress", authMiddleware, getCourseProgress);
+router.get("/users/me/progress", getCourseProgress);
 
 router.patch(
   "/courses/:courseId/workouts/:workoutId",

@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 6,
+    select: false,
   },
   selectedCourses: [
     {
@@ -29,7 +30,7 @@ const userSchema = new mongoose.Schema({
         {
           workoutId: { type: String, required: true },
           workoutCompleted: { type: Boolean, default: false },
-          progressData: [{ type: Number, default: 0 }],
+          progressData: { type: [Number], default: [] },
         },
       ],
     },

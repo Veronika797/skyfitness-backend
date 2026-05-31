@@ -4,4 +4,4 @@ export const MONGODB_URI =
 export const JWT_SECRET =
   process.env.JWT_SECRET || "your-secret-key-change-in-production";
 export const JWT_EXPIRES_IN = "7d";
-export const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:5174";
+export const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:5173";

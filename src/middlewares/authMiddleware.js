@@ -1,18 +1,21 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../utils/constants.js";
 
-export const authMiddleware = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
+export const authMiddleware = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
-    return res.status(401).json({ message: "Нет токена авторизации" });
+  if (!authHeader?.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Требуется авторизация" });
   }
+
+  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.userId = decoded.id;
+    req.userId = decoded.userId;
+
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Неверный токен" });
+    return res.status(401).json({ message: "Ошибка авторизации" });
   }
 };

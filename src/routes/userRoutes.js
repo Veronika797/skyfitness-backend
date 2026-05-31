@@ -8,8 +8,35 @@ import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/me", authMiddleware, getMe);
-router.post("/me/courses", authMiddleware, addUserCourse);
-router.delete("/me/courses/:courseId", authMiddleware, removeUserCourse);
+router.use((req, res, next) => {
+  next();
+});
+
+router.get(
+  "/me",
+  authMiddleware,
+  (req, res, next) => {
+    next();
+  },
+  getMe,
+);
+
+router.post(
+  "/me/courses",
+  authMiddleware,
+  (req, res, next) => {
+    next();
+  },
+  addUserCourse,
+);
+
+router.delete(
+  "/me/courses/:courseId",
+  authMiddleware,
+  (req, res, next) => {
+    next();
+  },
+  removeUserCourse,
+);
 
 export default router;

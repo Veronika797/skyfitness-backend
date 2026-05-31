@@ -5,7 +5,6 @@ export const getAllCourses = async (req, res) => {
     const courses = await Course.find().select("-__v");
     res.json(courses);
   } catch (error) {
-    console.error("Ошибка при получении курсов:", error);
     res.status(500).json({ message: "Ошибка сервера" });
   }
 };
@@ -21,7 +20,6 @@ export const getCourseById = async (req, res) => {
     }
     res.json(course);
   } catch (error) {
-    console.error("Ошибка при получении курса:", error);
     res.status(500).json({ message: "Ошибка сервера" });
   }
 };
@@ -40,7 +38,6 @@ export const getCourseWorkouts = async (req, res) => {
 
     res.json(course.workouts);
   } catch (error) {
-    console.error("Ошибка при получении тренировок:", error);
     res.status(500).json({ message: "Ошибка сервера" });
   }
 };

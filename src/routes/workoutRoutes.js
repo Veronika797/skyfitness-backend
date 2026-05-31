@@ -1,17 +1,16 @@
 import express from "express";
+import {
+  getWorkoutById,
+  getWorkoutsByCourse,
+  createWorkout,
+  addWorkoutToCourse,
+} from "../controllers/workoutController.js";
+
 const router = express.Router();
 
-router.get("/workouts/:workoutId", async (req, res) => {
-  try {
-    const workout = await Workout.findById(req.params.workoutId);
-    if (!workout) {
-      return res.status(404).json({ message: "Тренировка не найдена" });
-    }
-    res.json(workout);
-  } catch (err) {
-    console.error("Ошибка:", err);
-    res.status(500).json({ message: "Ошибка сервера" });
-  }
-});
+router.get("/courses/:courseId/workouts/:workoutId", getWorkoutById);
+router.post("/workouts", createWorkout);
+router.post("/courses/:courseId/workouts", addWorkoutToCourse);
+router.get("/courses/:courseId/workouts", getWorkoutsByCourse);
 
 export default router;
